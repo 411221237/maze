@@ -1,5 +1,7 @@
 #include<stdio.h>
 #define size 10
+#define EQU(a,b) (a.x==b.x && a.y==b.y)
+
 
 typedef struct axis
 {
@@ -73,9 +75,14 @@ int main(){
     Axis none={-1,-1};
     now=enter;
     mark[now.x][now.y]='*';
-    
 
-
-
+    while(!(EQU(now,exit))){
+        now=Can_move(&stack1,now);
+        if(EQU(now,none)){
+            printf("沒有出口");
+            break;
+        }
+        printf("移動到 %d %d\n",now.x,now.y);
+    }
     return 0;
 }
