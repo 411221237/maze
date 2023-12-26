@@ -1,7 +1,19 @@
 #include<stdio.h>
-#define size 10
+#define size 9
 #define EQU(a,b) (a.x==b.x && a.y==b.y)
 
+char maze[size][size] ={
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 0, 0, 0, 1, 0, 1, 1, 1 },
+    { 1, 0, 1, 0, 1, 0, 0, 0, 1 },
+    { 1, 1, 1, 0, 1, 0, 1, 0, 1 },
+    { 1, 0, 1, 1, 0, 0, 1, 0, 1 },
+    { 1, 1, 0, 1, 1, 0, 1, 0, 1 },
+    { 1, 0, 0, 1, 0, 0, 1, 0, 1 },
+    { 1, 0, 0, 1, 0, 0, 0, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 }};
+    
+char mark[size][size]={0};
 
 typedef struct axis
 {
@@ -42,7 +54,7 @@ Axis Can_move(Stack *stackptr,Axis position){
                 space.x=position.x+dx;
                 space.y=position.y+dy;
                 if(maze[space.x][space.y]==0 && mark[space.x][space.y]!='*'){
-                    mark[space.x][space.y]='*';
+                    mark[space.x][space.y]= '*';
                     push(stackptr,space);
                 }
             }
@@ -51,27 +63,14 @@ Axis Can_move(Stack *stackptr,Axis position){
     return pop(stackptr);
 }
 
-char maze[size][size] ={
-    { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-    { 0, 0, 0, 1, 1, 0, 1, 1, 0, 1 },
-    { 1, 0, 1, 1, 0, 0, 0, 0, 0, 1 },
-    { 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
-    { 1, 1, 1, 0, 1, 1, 0, 1, 1, 1 },
-    { 1, 0, 1, 1, 1, 0, 0, 1, 0, 1 },
-    { 1, 0, 0, 0, 0, 0, 1, 1, 0, 0 },
-    { 1, 0, 1, 1, 1, 1, 1, 0, 0, 1 },
-    { 1, 0, 0, 0, 1, 0, 0, 0, 1, 1 },
-    { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-    };
-char mark[size][size]={0};
 
 int main(){
     
     Stack stack1;
     Axis now;
     stack1.top=-1;
-    Axis enter={1,0};
-    Axis exit={6,9};
+    Axis enter={1,1};
+    Axis exit={7,7};
     Axis none={-1,-1};
     now=enter;
     mark[now.x][now.y]='*';
